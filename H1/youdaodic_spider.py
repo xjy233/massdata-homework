@@ -16,6 +16,7 @@ outputDecode = sys.stdout.encoding
 def getYoudaoHtml(word='bless'):
     url = r'http://dict.youdao.com/search'
     data = {'le': 'eng', 'q': word, 'keyfrom': 'dict'}
+    #加上head，模仿成手机浏览器
     headers = {
     'User-Agent': r'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '
     r'Chrome/45.0.2454.85 Safari/537.36 115Browser/6.0.3',
@@ -29,8 +30,8 @@ def getYoudaoHtml(word='bless'):
     return page.decode('utf-8')
 
 """
-去查找并写入一个单词的爬取内容，并记录到test233.txt
-输入：需要查询的单词
+去查找并写入一个单词的爬取内容，并记录到DownData.txt
+输入：word - 需要查询的单词
 """
 def WriteOneWord(word='application',file=''):
     wordSoup = BeautifulSoup(getYoudaoHtml(word),"lxml")
@@ -47,7 +48,7 @@ def WriteOneWord(word='application',file=''):
     file.write(writestr + "\n")
 """
 加载单词表
-输入：要打开的单词文件
+输入：file - 要打开的单词文件
 """
 def loadWords(file):
     fr = open(file)
